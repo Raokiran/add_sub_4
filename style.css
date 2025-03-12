@@ -1,0 +1,29 @@
+.card{
+ height:100px;
+ width: 100px;
+border: 10px solid;
+border-radius:20px;
+
+
+
+
+}
+button{
+width:80px;
+height:30px;
+border-radius:5px;
+border-width: 5px ;
+color:bisque;
+
+
+}
+
+h1{
+position: relative;
+top:-15px;
+color:bisque;
+text-align: center;
+  font-family:Verdana, Tahoma, sans-serif;
+ font-size:50px;
+
+}
