@@ -10,11 +10,12 @@
             event.stopPropagation();
             if (index === 1) {
                 back1.push(num1); 
-               
+               front1=[];
                 num1 += 1;
                 document.getElementById("number1").innerHTML = `${num1}`;
             } else {
                 back.push(num); 
+                front=[];
                 num += 1;
                 document.getElementById("number").innerHTML = `${num}`;
             }
@@ -24,10 +25,12 @@
             event.stopPropagation();
             if (index === 1) {
                 back1.push(num1); 
+                front1=[];
                 num1 -= 1;
                 document.getElementById("number1").innerHTML = `${num1}`;
             } else {
                 back.push(num); 
+                front=[];
                 num -= 1;
                 document.getElementById("number").innerHTML = `${num}`;
             }
