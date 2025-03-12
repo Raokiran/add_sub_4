@@ -1,125 +1,108 @@
 <html>
-    <head><title>Addition and Subraction</title></head>
+    <head><title>Addition and Subtraction</title></head>
     <link rel="stylesheet" href="style.css">
- <script>
-let num=0,num1=0;
-let back=[];
-let front=[];
-let back1=[];
-let front1=[];
+    <script>
+        let num = 0, num1 = 0;
+        let back = [], front = [];
+        let back1 = [], front1 = [];
 
-function add(event,index){
-    event.stopPropagation();
-    if (index===1) {
-        num1=num1+1;
-        document.getElementById("number1").innerHTML=`${num1 }`;
-        back1.push({num1});
-    } else {
-        num=num+1;
-        document.getElementById("number").innerHTML=`${num }`;
-        back.push({num});
-    }
+        function add(event, index) {
+            event.stopPropagation();
+            if (index === 1) {
+                back1.push(num1); 
+               
+                num1 += 1;
+                document.getElementById("number1").innerHTML = `${num1}`;
+            } else {
+                back.push(num); 
+                num += 1;
+                document.getElementById("number").innerHTML = `${num}`;
+            }
+        }
 
+        function sub(event, index) {
+            event.stopPropagation();
+            if (index === 1) {
+                back1.push(num1); 
+                num1 -= 1;
+                document.getElementById("number1").innerHTML = `${num1}`;
+            } else {
+                back.push(num); 
+                num -= 1;
+                document.getElementById("number").innerHTML = `${num}`;
+            }
+        }
 
-return;
-}
+        function undo(index) {
+            if (index === 1 && back1.length > 0) {
+                front1.push(num1);
+                num1 = back1.pop(); 
+                document.getElementById("number1").innerHTML = `${num1}`;
+            } else if (index === 0 && back.length > 0) {
+                front.push(num); 
+                num = back.pop(); 
+                document.getElementById("number").innerHTML = `${num}`;
+            }
+        }
 
-function sub(event,index){
-    event.stopPropagation();
-  
-    if (index===1) {
-        num1=num1-1;
-        document.getElementById("number1").innerHTML=`${num1 }`;
-        back1.push({num1});
-    } else {
-        num=num-1;
-        document.getElementById("number").innerHTML=`${num }`;
-        back.push({num});
-    }
+        function redo(index) {
+            if (index === 1 && front1.length > 0) {
+                back1.push(num1); 
+                num1 = front1.pop(); 
+                document.getElementById("number1").innerHTML = `${num1}`;
+            } else if (index === 0 && front.length > 0) {
+                back.push(num);
+                num = front.pop(); 
+                document.getElementById("number").innerHTML = `${num}`;
+            }
+        }
 
-return;
-}
-
-function undo(index){
-
-    if (index===1) {
-        previous=back1.pop();
-        front1.push(previous);
-        num1=previous.num1;
-        document.getElementById("number1").innerHTML=`${num1 }`;
-    } else {
-        previous=back.pop();
-        front.push(previous);
-        num=previous.num;
-        document.getElementById("number").innerHTML=`${num }`
-    }
-    return;
-}
-
-function redo(index){
-
-
-    if(index===1){
-        forward=front1.pop();
-        back1.push(forward);
-        num1=forward.num1;
-        document.getElementById("number1").innerHTML=`${num1 }`;
-    }
-else{ 
-    forward=front.pop();
-    back.push(forward);
-      num=forward.num;
-    document.getElementById("number").innerHTML=`${num }`;
-}
-
- 
-}
-
-
-
-function reset(index){
-    num=0;
-    num1=0;
-    if (index===1) {
-        document.getElementById("number1").innerHTML=`0`;
-    } else {
-        document.getElementById("number").innerHTML=`0`;
-    }
-
-};
-</script>
+        function reset(index) {
+            if (index === 1) {
+                num1 = 0;
+                back1 = [];
+                front1 = [];
+                document.getElementById("number1").innerHTML = `0`;
+            } else {
+                num = 0;
+                back = [];
+                front = [];
+                document.getElementById("number").innerHTML = `0`;
+            }
+        }
+    </script>
     <body style="place-content: center; place-items: center;">
-<div style="display:flex;gap:30px;padding: 30px;"> 
-    <div style="place-content: center; place-items: center;">
-       <div class="card" style="background-color: red;"><h1 id="number" >0</h1></div>
-        <br>
-        <div style="display:flex;gap:15px;">
-            <button type="button" onclick="sub(event,0)" style="background-color: red;">Sub -</button>        
-            <button type="button" onclick="add(event,0)"style="background-color: red;">Add +</button>
-       </div>
+        <div style="display:flex;gap:30px;padding: 30px;"> 
+            <div style="place-content: center; place-items: center;">
+                <div class="card" style="background-color: red;"><h1 id="number">0</h1></div>
+                <br>
+                <div style="display:flex;gap:10px;">
+                    <button type="button" onclick="sub(event,0)" style="background-color: red;">Sub -</button>        
+                    <button type="button" onclick="add(event,0)" style="background-color: red;">Add +</button>
+                </div>
+            </div>
+
+            <div style="place-content: center; place-items: center;">
+                <div class="card" style="background-color: blue;"><h1 id="number1">0</h1></div>
+                <br>
+                <div style="display:flex;gap:10px;">
+                    <button type="button" onclick="sub(event,1)" style="background-color: blue;">Sub -</button>        
+                    <button type="button" onclick="add(event,1)" style="background-color: blue;">Add +</button>
+                </div>
+                
+            </div>
         </div>
-        
 
-        <div style="place-content: center; place-items: center;">
-            <div class="card" style="background-color: blue;"><h1 id="number1" >0</h1></div>
-             <br>
-             <div style="display:flex;gap:15px;">
-                 <button type="button" onclick="sub(event,1)" style="background-color: blue;">Sub -</button>        
-                 <button type="button" onclick="add(event,1)" style="background-color: blue;">Add +</button>
-            </div>
-             </div>
-            </div>
-       
-
-            
-             <div style="display:flex;gap:20px;padding:20px">
-                <button type="button" onclick="undo(0)"style="background-color: red;"> undo</button> 
-                <button type="button" onclick="reset(0)"style="background-color: red;"> reset</button>     
-                <button type="button" onclick="redo(0)"style="background-color: red;"> redo</button>  
-
-                <button type="button" onclick="undo(1)"style="background-color: blue;"> undo</button> 
-                <button type="button" onclick="reset(1)"style="background-color: blue;"> reset</button>     
-                <button type="button" onclick="redo(1)"style="background-color: blue;"> redo</button>  
-             </div>
+        <div style="display:flex;gap:20px;">
+            <div><button type="button" onclick="undo(0)" style="background-color: red;">Undo</button> 
+            <button type="button" onclick="reset(0)" style="background-color: red;">Reset</button>     
+            <button type="button" onclick="redo(0)" style="background-color: red;">Redo</button>  
+</div>
+            <div>   <button type="button" onclick="undo(1)" style="background-color: blue;">Undo</button> 
+            <button type="button" onclick="reset(1)" style="background-color: blue;">Reset</button>     
+            <button type="button" onclick="redo(1)" style="background-color: blue;">Redo</button>  
+        </div>
+         
+        </div>
     </body>
 </html>
